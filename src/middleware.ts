@@ -34,7 +34,7 @@ export default auth((req) => {
   // }
 
   // 4. Role-Based Access Control (RBAC) checking
-  const userRole = ((session?.user as any)?.role as Role) || "ADMIN";
+  const userRole = (session.user as any).role as Role;
 
   // Find if current path is restricted
   const matchedRoute = Object.keys(ROUTE_PERMISSIONS).find(
