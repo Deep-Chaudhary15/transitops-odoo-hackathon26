@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 interface Trip {
   id: string;
@@ -243,9 +244,12 @@ export function TripTable({ initialTrips, vehicles, drivers }: TripTableProps) {
                 filteredTrips.map((trip) => (
                   <tr key={trip.id} className="hover:bg-[#ededfb]/40 transition-colors">
                     <td className="px-6 py-4">
-                      <p className="font-semibold text-sm text-[#191b25]">
+                      <Link
+                        href={`/trips/${trip.id}`}
+                        className="font-semibold text-sm text-[#003ec7] hover:text-[#0052ff] hover:underline cursor-pointer"
+                      >
                         {trip.trip_number || `TRP-${trip.id.slice(0, 6)}`}
-                      </p>
+                      </Link>
                       <p className="text-xs text-[#737688]">
                         Dispatched: {trip.planned_departure ? new Date(trip.planned_departure).toLocaleDateString() : "Recent"}
                       </p>
