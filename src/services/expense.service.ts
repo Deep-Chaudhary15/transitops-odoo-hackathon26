@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { prisma } from "@/lib/prisma";
 
 export interface ExpenseInput {
   vehicle_id?: string | null;
@@ -13,12 +14,44 @@ export interface ExpenseInput {
 
 export const expenseService = {
   async getAll() {
-    const { data, error } = await supabase
-      .from("expenses")
-      .select("*, vehicle:vehicles(*), trip:trips(*)")
-      .order("created_at", { ascending: false });
-    if (error) throw error;
-    return data;
+    try {
+      const { data, error } = await supabase
+        .from("expenses")
+        .select("*, vehicle:vehicles(*), trip:trips(*)")
+        .order("created_at", { ascending: false });
+      if (!error && data && data.length > 0) {
+        return data;
+      }
+    } catch (e) {
+      console.warn("Supabase expense query failed or empty, falling back to local Prisma DB:", e);
+    }
+
+    const localExpenses = await prisma.expense.findMany({
+      include: { trip: { include: { vehicle: true } } },
+      orderBy: { date: "desc" },
+    });
+
+    return localExpenses.map((e) => ({
+      id: e.id,
+      vehicle_id: e.trip ? e.trip.vehicleId : null,
+      trip_id: e.tripId,
+      maintenance_id: null,
+      expense_type: (e.category.toLowerCase() as any) || "other",
+      amount: Number(e.amount),
+      expense_date: e.date.toISOString(),
+      description: e.notes || `${e.category} expense`,
+      receipt_url: null,
+      created_at: e.createdAt.toISOString(),
+      trip: e.trip ? { id: e.trip.id, source: e.trip.source, destination: e.trip.destination } : null,
+      vehicle:
+        e.trip && e.trip.vehicle
+          ? {
+              id: e.trip.vehicle.id,
+              registration_number: e.trip.vehicle.registrationNumber,
+              model: e.trip.vehicle.model,
+            }
+          : null,
+    }));
   },
 
   async getById(id: string) {

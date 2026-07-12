@@ -8,6 +8,14 @@ export default auth((req) => {
   const { pathname } = req.nextUrl;
   const session = req.auth;
 
+  // 0. Development Bypass check
+  if (process.env.DEV_BYPASS === "true") {
+    if (pathname === "/login" || pathname === "/") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+    return NextResponse.next();
+  }
+
   // 1. If hitting /login and logged in, redirect to /dashboard
   if (pathname === "/login" && session?.user) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
