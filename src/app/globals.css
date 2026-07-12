@@ -213,4 +213,23 @@
   .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
   .custom-scrollbar::-webkit-scrollbar-thumb { background: #c3c5d9; border-radius: 10px; }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #737688; }
+
+  /* Leaflet map overrides – Tailwind resets break tile rendering */
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .leaflet-tile-pane img,
+  .leaflet-tile {
+    max-width: none !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  .leaflet-control-container .leaflet-control {
+    z-index: 800;
+  }
+  .leaflet-pane {
+    z-index: 400;
+  }
 }
