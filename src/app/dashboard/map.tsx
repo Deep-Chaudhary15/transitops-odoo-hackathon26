@@ -23,14 +23,14 @@ interface FleetMapProps {
 }
 
 const CITY_COORDS: Record<string, [number, number]> = {
-  "Chicago, IL": [41.8781, -87.6298],
-  "Denver, CO": [39.7392, -104.9903],
-  "Dallas, TX": [32.7767, -96.7970],
-  "Houston, TX": [29.7604, -95.3698],
-  "Miami, FL": [25.7617, -80.1918],
-  "Atlanta, GA": [33.7490, -84.3880],
-  "Los Angeles, CA": [34.0522, -118.2437],
-  "San Francisco, CA": [37.7749, -122.4194],
+  "Ahmedabad, GJ": [23.0225, 72.5714],
+  "Surat, GJ": [21.1702, 72.8311],
+  "Vadodara, GJ": [22.3072, 73.1812],
+  "Rajkot, GJ": [22.3039, 70.8022],
+  "Gandhinagar, GJ": [23.2156, 72.6369],
+  "Jamnagar, GJ": [22.4707, 70.0577],
+  "Bhavnagar, GJ": [21.7645, 72.1519],
+  "Bhuj, GJ": [23.2420, 69.6669],
 };
 
 export default function FleetMap({ activeTrips }: FleetMapProps) {
@@ -40,10 +40,10 @@ export default function FleetMap({ activeTrips }: FleetMapProps) {
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return;
 
-    // Initialize map centered on US
+    // Initialize map centered on Gujarat, India
     const map = L.map(mapContainerRef.current, {
-      center: [37.0902, -95.7129],
-      zoom: 4,
+      center: [22.2587, 71.1924],
+      zoom: 7,
       zoomControl: false,
     });
 

@@ -68,12 +68,12 @@ async function main() {
 
   // Create Vehicles
   const vehiclesData = [
-    { registrationNumber: "FLT-9204", model: "eCascadia", make: "Freightliner", year: 2023, type: VehicleType.TRUCK, capacityKg: 18000, odometer: 45200, acquisitionCost: 150000, region: "Midwest", status: VehicleStatus.ON_TRIP },
-    { registrationNumber: "FLT-7112", model: "VNR Electric", make: "Volvo", year: 2022, type: VehicleType.TRUCK, capacityKg: 15000, odometer: 32400, acquisitionCost: 140000, region: "East Coast", status: VehicleStatus.AVAILABLE },
-    { registrationNumber: "FLT-3309", model: "E-Transit", make: "Ford", year: 2023, type: VehicleType.VAN, capacityKg: 3500, odometer: 12800, acquisitionCost: 55000, region: "Pacific Northwest", status: VehicleStatus.IN_SHOP },
-    { registrationNumber: "FLT-8821", model: "F-150 Lightning", make: "Ford", year: 2022, type: VehicleType.PICKUP, capacityKg: 2000, odometer: 18900, acquisitionCost: 65000, region: "South", status: VehicleStatus.ON_TRIP },
-    { registrationNumber: "FLT-1045", model: "Semi", make: "Tesla", year: 2024, type: VehicleType.TRUCK, capacityKg: 20000, odometer: 5400, acquisitionCost: 180000, region: "California", status: VehicleStatus.AVAILABLE },
-    { registrationNumber: "FLT-5520", model: "Sprinter", make: "Mercedes-Benz", year: 2021, type: VehicleType.VAN, capacityKg: 4000, odometer: 68000, acquisitionCost: 50000, region: "Midwest", status: VehicleStatus.DECOMMISSIONED },
+    { registrationNumber: "FLT-9204", model: "eCascadia", make: "Freightliner", year: 2023, type: VehicleType.TRUCK, capacityKg: 18000, odometer: 45200, acquisitionCost: 150000, region: "Saurashtra", status: VehicleStatus.ON_TRIP },
+    { registrationNumber: "FLT-7112", model: "VNR Electric", make: "Volvo", year: 2022, type: VehicleType.TRUCK, capacityKg: 15000, odometer: 32400, acquisitionCost: 140000, region: "South Gujarat", status: VehicleStatus.AVAILABLE },
+    { registrationNumber: "FLT-3309", model: "E-Transit", make: "Ford", year: 2023, type: VehicleType.VAN, capacityKg: 3500, odometer: 12800, acquisitionCost: 55000, region: "North Gujarat", status: VehicleStatus.IN_SHOP },
+    { registrationNumber: "FLT-8821", model: "F-150 Lightning", make: "Ford", year: 2022, type: VehicleType.PICKUP, capacityKg: 2000, odometer: 18900, acquisitionCost: 65000, region: "Central Gujarat", status: VehicleStatus.ON_TRIP },
+    { registrationNumber: "FLT-1045", model: "Semi", make: "Tesla", year: 2024, type: VehicleType.TRUCK, capacityKg: 20000, odometer: 5400, acquisitionCost: 180000, region: "Kutch", status: VehicleStatus.AVAILABLE },
+    { registrationNumber: "FLT-5520", model: "Sprinter", make: "Mercedes-Benz", year: 2021, type: VehicleType.VAN, capacityKg: 4000, odometer: 68000, acquisitionCost: 50000, region: "Central Gujarat", status: VehicleStatus.DECOMMISSIONED },
   ];
 
   const vehicles = [];
@@ -104,31 +104,31 @@ async function main() {
     {
       vehicleId: vehicles.find(v => v.registrationNumber === "FLT-9204")!.id,
       driverId: drivers.find(d => d.name === "James Wilson")!.id,
-      source: "Chicago, IL",
-      destination: "Denver, CO",
+      source: "Ahmedabad, GJ",
+      destination: "Rajkot, GJ",
       cargoWeightKg: 12500,
-      plannedDistance: 1600,
+      plannedDistance: 215,
       status: TripStatus.ACTIVE,
       dispatchedAt: new Date(Date.now() - 3600000 * 4), // 4 hours ago
     },
     {
       vehicleId: vehicles.find(v => v.registrationNumber === "FLT-8821")!.id,
       driverId: drivers.find(d => d.name === "Emily Blunt")!.id,
-      source: "Dallas, TX",
-      destination: "Houston, TX",
+      source: "Vadodara, GJ",
+      destination: "Surat, GJ",
       cargoWeightKg: 1800,
-      plannedDistance: 385,
+      plannedDistance: 150,
       status: TripStatus.ACTIVE,
       dispatchedAt: new Date(Date.now() - 3600000 * 2), // 2 hours ago
     },
     {
       vehicleId: vehicles.find(v => v.registrationNumber === "FLT-7112")!.id,
       driverId: drivers.find(d => d.name === "Sarah Connor")!.id,
-      source: "Miami, FL",
-      destination: "Atlanta, GA",
+      source: "Gandhinagar, GJ",
+      destination: "Bhavnagar, GJ",
       cargoWeightKg: 11000,
-      plannedDistance: 1060,
-      actualDistance: 1065,
+      plannedDistance: 200,
+      actualDistance: 205,
       status: TripStatus.COMPLETED,
       dispatchedAt: new Date(Date.now() - 86400000 * 2), // 2 days ago
       completedAt: new Date(Date.now() - 86400000 * 1.5),
@@ -136,10 +136,10 @@ async function main() {
     {
       vehicleId: vehicles.find(v => v.registrationNumber === "FLT-1045")!.id,
       driverId: drivers.find(d => d.name === "Sarah Connor")!.id,
-      source: "Los Angeles, CA",
-      destination: "San Francisco, CA",
+      source: "Bhuj, GJ",
+      destination: "Jamnagar, GJ",
       cargoWeightKg: 8500,
-      plannedDistance: 615,
+      plannedDistance: 280,
       status: TripStatus.PENDING,
     },
   ];
