@@ -251,7 +251,7 @@ export function TripTable({ initialTrips, vehicles, drivers }: TripTableProps) {
                         {trip.trip_number || `TRP-${trip.id.slice(0, 6)}`}
                       </Link>
                       <p className="text-xs text-[#737688]">
-                        Dispatched: {trip.planned_departure ? new Date(trip.planned_departure).toLocaleDateString() : "Recent"}
+                        Dispatched: {trip.planned_departure ? new Date(trip.planned_departure).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) : "Recent"}
                       </p>
                     </td>
                     <td className="px-4 py-4">

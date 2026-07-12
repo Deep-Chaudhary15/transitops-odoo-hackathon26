@@ -287,7 +287,7 @@ export function FuelTable({ initialFuel, initialExpenses, vehicles }: FuelTableP
                   filteredFuel.map((f) => (
                     <tr key={f.id} className="hover:bg-[#ededfb]/40 transition-colors">
                       <td className="px-6 py-4 text-sm font-medium text-[#191b25]">
-                        {new Date(f.fuel_date).toLocaleDateString()}
+                        {new Date(f.fuel_date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                       </td>
                       <td className="px-4 py-4">
                         <span className="font-bold text-sm text-[#003ec7] bg-[#f3f2ff] px-2.5 py-1 rounded-md">
@@ -343,7 +343,7 @@ export function FuelTable({ initialFuel, initialExpenses, vehicles }: FuelTableP
                   filteredExpenses.map((e) => (
                     <tr key={e.id} className="hover:bg-[#ededfb]/40 transition-colors">
                       <td className="px-6 py-4 text-sm font-medium text-[#191b25]">
-                        {new Date(e.expense_date).toLocaleDateString()}
+                        {new Date(e.expense_date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                       </td>
                       <td className="px-4 py-4">
                         <span className="font-bold text-sm text-[#003ec7] bg-[#f3f2ff] px-2.5 py-1 rounded-md">

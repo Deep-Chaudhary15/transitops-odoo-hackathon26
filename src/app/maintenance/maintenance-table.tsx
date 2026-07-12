@@ -258,7 +258,7 @@ export function MaintenanceTable({ initialLogs, vehicles }: MaintenanceTableProp
                         {log.maintenance_number || `MNT-${log.id.slice(0, 6)}`}
                       </p>
                       <p className="text-xs text-[#737688]">
-                        Opened: {new Date(log.opened_at).toLocaleDateString()}
+                        Opened: {new Date(log.opened_at).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                       </p>
                     </td>
                     <td className="px-4 py-4">
