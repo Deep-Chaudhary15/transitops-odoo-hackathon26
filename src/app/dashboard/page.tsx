@@ -5,6 +5,7 @@ import { VehicleStatus, DriverStatus, TripStatus, MaintenanceStatus, VehicleType
 
 // Recharts is a client component library, we will create a client component for charts to load inside this page.
 import { FleetCharts } from "./fleet-charts";
+import FleetMap from "./map-wrapper";
 
 interface DashboardPageProps {
   searchParams: Promise<{
@@ -95,6 +96,17 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     where: { region: { not: null } },
   });
   const regions = distinctRegions.map((r) => r.region).filter(Boolean) as string[];
+
+  // 4. Fetch active trips for map display
+  const activeTripsForMap = await prisma.trip.findMany({
+    where: {
+      status: TripStatus.ACTIVE,
+    },
+    include: {
+      vehicle: true,
+      driver: true,
+    },
+  });
 
   return (
     <div className="space-y-6">
@@ -232,26 +244,9 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
               </div>
             </div>
           </div>
-          {/* Map Simulation */}
-          <div className="flex-1 bg-[#ededfb] relative flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#0052ff_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
-            <img
-              className="w-full h-full object-cover select-none"
-              src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=1200"
-              alt="Vector Navigation Map"
-            />
-            {/* Map Controls */}
-            <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-10">
-              <button className="w-9 h-9 bg-white rounded-lg border border-[#e1e1ef] flex items-center justify-center text-[#191b25] hover:bg-[#f3f2ff] transition-all shadow-sm">
-                <span className="material-symbols-outlined text-xl">add</span>
-              </button>
-              <button className="w-9 h-9 bg-white rounded-lg border border-[#e1e1ef] flex items-center justify-center text-[#191b25] hover:bg-[#f3f2ff] transition-all shadow-sm">
-                <span className="material-symbols-outlined text-xl">remove</span>
-              </button>
-              <button className="w-9 h-9 bg-white rounded-lg border border-[#e1e1ef] flex items-center justify-center text-[#191b25] hover:bg-[#f3f2ff] transition-all shadow-sm">
-                <span className="material-symbols-outlined text-xl">my_location</span>
-              </button>
-            </div>
+          {/* Live Dispatch Interactive Map */}
+          <div className="flex-1 min-h-[400px] z-0 relative">
+            <FleetMap activeTrips={activeTripsForMap} />
           </div>
         </div>
       </div>
