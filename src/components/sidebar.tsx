@@ -59,36 +59,70 @@ export function Sidebar({ user }: SidebarProps) {
       </div>
 
       {/* Navigation List */}
-      <nav className="flex-1 space-y-1 px-3">
-        {allowedNavItems.map((item) => {
-          const isActive = pathname.startsWith(item.href);
-          // Convert Lucide icon names to Material Symbols names mapping
-          const symbolMap: Record<string, string> = {
-            dashboard: "dashboard",
-            vehicles: "local_shipping",
-            drivers: "person",
-            trips: "route",
-            "my-trips": "map_pin",
-            maintenance: "build",
-            "fuel-expenses": "local_gas_station",
-            reports: "assessment",
-            settings: "settings",
-          };
-          const symbolName = symbolMap[item.key] || "circle";
+      <nav className="flex-1 space-y-1 px-3 overflow-y-auto">
+        {allowedNavItems
+          .filter((item) => item.key !== "settings")
+          .map((item) => {
+            const isActive = pathname.startsWith(item.href);
+            // Convert Lucide icon names to Material Symbols names mapping
+            const symbolMap: Record<string, string> = {
+              dashboard: "dashboard",
+              vehicles: "local_shipping",
+              drivers: "person",
+              trips: "route",
+              maintenance: "build",
+              fuel: "local_gas_station",
+              expenses: "credit_card",
+              reports: "assessment",
+            };
+            const symbolName = symbolMap[item.key] || "circle";
 
-          return (
+            return (
+              <Link
+                key={item.key}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all group relative",
+                  isActive
+                    ? "bg-[#0052ff]/10 text-[#0052ff] border-l-2 border-[#0052ff]"
+                    : "text-[#505f76] hover:bg-[#ededfb] hover:text-[#191b25]"
+                )}
+              >
+                <span className="material-symbols-outlined shrink-0">
+                  {symbolName}
+                </span>
+                {!isCollapsed && (
+                  <span className="text-sm transition-opacity duration-200">
+                    {item.label}
+                  </span>
+                )}
+                {isCollapsed && (
+                  <span className="absolute left-16 bg-[#191b25] text-white px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                    {item.label}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
+      </nav>
+
+      {/* Settings fixed at the bottom */}
+      {allowedNavItems.find((item) => item.key === "settings") && (() => {
+        const item = allowedNavItems.find((item) => item.key === "settings")!;
+        const isActive = pathname.startsWith(item.href);
+        return (
+          <div className="px-3 border-t border-[#e1e1ef] pt-3">
             <Link
-              key={item.key}
               href={item.href}
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all group relative",
                 isActive
-                  ? "bg-[#0052ff]/10 text-[#003ec7] border-l-2 border-[#003ec7]"
+                  ? "bg-[#0052ff]/10 text-[#0052ff] border-l-2 border-[#0052ff]"
                   : "text-[#505f76] hover:bg-[#ededfb] hover:text-[#191b25]"
               )}
             >
               <span className="material-symbols-outlined shrink-0">
-                {symbolName}
+                settings
               </span>
               {!isCollapsed && (
                 <span className="text-sm transition-opacity duration-200">
@@ -101,12 +135,12 @@ export function Sidebar({ user }: SidebarProps) {
                 </span>
               )}
             </Link>
-          );
-        })}
-      </nav>
+          </div>
+        );
+      })()}
 
       {/* User Footer Profile */}
-      <div className="px-4 pt-4 border-t border-[#e1e1ef] mt-4">
+      <div className="px-4 pt-4 border-t border-[#e1e1ef] mt-2">
         <div className={cn("flex items-center gap-3", isCollapsed ? "justify-center" : "")}>
           <img
             className="w-10 h-10 rounded-full border border-[#e1e1ef] shrink-0"
