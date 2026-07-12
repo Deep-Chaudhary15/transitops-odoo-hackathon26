@@ -1,7 +1,6 @@
 import React from "react";
 import TripMapWrapper from "./trip-map-wrapper";
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
 
 interface PageProps {
   params: Promise<{ id: string }>;
