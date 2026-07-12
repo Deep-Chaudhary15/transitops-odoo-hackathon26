@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { ROUTE_PERMISSIONS } from "@/lib/rbac";
 import type { Role } from "@/lib/rbac";
 
-export default auth((req) => {
+export default auth((req: any) => {
   const { pathname } = req.nextUrl;
   const session = req.auth;
 
@@ -37,9 +37,9 @@ export default auth((req) => {
   }
 
   // 3. Not authenticated → redirect to /login
-  // if (!session?.user) {
-  //   return NextResponse.redirect(new URL("/login", req.url));
-  // }
+  if (!session?.user) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 
   // 4. Role-Based Access Control (RBAC) checking
   const userRole = (session.user as any).role as Role;
