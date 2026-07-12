@@ -6,9 +6,9 @@ import {
   Route,
   Wrench,
   Fuel,
+  CreditCard,
   BarChart3,
   Settings,
-  MapPin,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Role } from "@/lib/rbac";
@@ -31,31 +31,24 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     key: "vehicles",
-    label: "Vehicle Registry",
+    label: "Vehicles",
     href: "/vehicles",
     icon: Truck,
-    roles: ["ADMIN", "FLEET_MANAGER"],
+    roles: ["ADMIN", "FLEET_MANAGER", "SAFETY_OFFICER", "FINANCIAL_ANALYST"],
   },
   {
     key: "drivers",
-    label: "Drivers & Safety",
+    label: "Drivers",
     href: "/drivers",
     icon: Users,
-    roles: ["ADMIN", "FLEET_MANAGER", "SAFETY_OFFICER"],
+    roles: ["ADMIN", "FLEET_MANAGER", "SAFETY_OFFICER", "FINANCIAL_ANALYST"],
   },
   {
     key: "trips",
-    label: "Trip Dispatcher",
+    label: "Trips",
     href: "/trips",
     icon: Route,
-    roles: ["ADMIN", "FLEET_MANAGER"],
-  },
-  {
-    key: "my-trips",
-    label: "My Trips",
-    href: "/my-trips",
-    icon: MapPin,
-    roles: ["DRIVER"],
+    roles: ["ADMIN", "FLEET_MANAGER", "SAFETY_OFFICER", "FINANCIAL_ANALYST", "DRIVER"],
   },
   {
     key: "maintenance",
@@ -65,15 +58,22 @@ export const NAV_ITEMS: NavItem[] = [
     roles: ["ADMIN", "FLEET_MANAGER", "SAFETY_OFFICER"],
   },
   {
-    key: "fuel-expenses",
-    label: "Fuel & Expenses",
-    href: "/fuel-expenses",
+    key: "fuel",
+    label: "Fuel",
+    href: "/fuel",
     icon: Fuel,
     roles: ["ADMIN", "FLEET_MANAGER", "FINANCIAL_ANALYST"],
   },
   {
+    key: "expenses",
+    label: "Expenses",
+    href: "/expenses",
+    icon: CreditCard,
+    roles: ["ADMIN", "FLEET_MANAGER", "FINANCIAL_ANALYST"],
+  },
+  {
     key: "reports",
-    label: "Reports & Analytics",
+    label: "Reports",
     href: "/reports",
     icon: BarChart3,
     roles: ["ADMIN", "FLEET_MANAGER", "SAFETY_OFFICER", "FINANCIAL_ANALYST"],
@@ -83,6 +83,6 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Settings",
     href: "/settings",
     icon: Settings,
-    roles: ["ADMIN"],
+    roles: ["ADMIN", "FLEET_MANAGER", "DRIVER", "SAFETY_OFFICER", "FINANCIAL_ANALYST"],
   },
 ];
