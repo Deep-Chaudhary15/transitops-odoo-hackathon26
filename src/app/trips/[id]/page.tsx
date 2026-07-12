@@ -25,12 +25,12 @@ export default async function TripDetailsPage({ params }: PageProps) {
   const tripDetails = {
     id: dbTrip?.id || "TRP-882910",
     status: dbTrip?.status || "In Transit",
-    source: dbTrip?.source || "Mundra Port",
-    destination: dbTrip?.destination || "Ahmedabad Hub",
-    description: dbTrip?.notes || "Industrial cargo haulage from Mundra Port to Ahmedabad Hub",
+    source: dbTrip?.source || "Seattle Port",
+    destination: dbTrip?.destination || "Chicago Hub",
+    description: dbTrip?.notes || "Deep-sea cargo haulage from Seattle Port to Chicago Hub",
     vehicleName: dbTrip?.vehicle?.model ? `${dbTrip.vehicle.make} ${dbTrip.vehicle.model}` : "Peterbilt 579 Platinum",
     assetId: dbTrip?.vehicle?.registrationNumber || "VH-0912",
-    plate: "GJ-12-AX-8921", // Gujarat Plate number
+    plate: "B92-XKL", // Plate number in reference
     fuelLevel: "65%", // Fuel level in reference
     driverName: dbTrip?.driver?.name || "Marcus Chen",
     driverExp: "Exp: 12 Years",
@@ -40,10 +40,10 @@ export default async function TripDetailsPage({ params }: PageProps) {
     payloadWeight: "24,500 lbs",
     payloadCapacity: "45,000 lbs",
     maintenanceDue: "1,240 mi",
-    distance: "376 km",
-    speed: "62 km/h",
-    fuelConsumed: "42 gal",
-    stops: "01 / 03",
+    distance: "2,058 mi",
+    speed: "62 mph",
+    fuelConsumed: "142 gal",
+    stops: "02 / 05",
   };
 
   return (
@@ -134,8 +134,8 @@ export default async function TripDetailsPage({ params }: PageProps) {
                     CURRENT LOCATION
                   </span>
                 </div>
-                <h5 className="text-xs font-bold text-[#191b25]">National Highway 47</h5>
-                <p className="text-xs text-[#505f76]">Near Surendranagar, Gujarat</p>
+                <h5 className="text-xs font-bold text-[#191b25]">Interstate 90</h5>
+                <p className="text-xs text-[#505f76]">Near Missoula, MT</p>
               </div>
             </div>
 
@@ -164,7 +164,7 @@ export default async function TripDetailsPage({ params }: PageProps) {
               </div>
               <div className="p-3.5 col-span-2 md:col-span-1">
                 <p className="text-[9px] text-[#737688] font-bold uppercase tracking-widest">Next Stop</p>
-                <p className="text-sm font-extrabold text-[#191b25] mt-0.5 truncate px-1">Rajkot Checkpoint, Gujarat</p>
+                <p className="text-sm font-extrabold text-[#191b25] mt-0.5 truncate px-1">Bozeman Checkpoint, MT</p>
               </div>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default async function TripDetailsPage({ params }: PageProps) {
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
                   <div>
                     <h4 className="text-sm font-bold text-[#191b25]">Dispatched</h4>
-                    <p className="text-xs text-[#505f76] mt-0.5">Mundra Operations Center • Unit 04</p>
+                    <p className="text-xs text-[#505f76] mt-0.5">Seattle Operations Center • Unit 04</p>
                   </div>
                   <p className="text-xs text-[#737688] font-medium sm:text-right">Jul 10, 08:30 AM</p>
                 </div>
@@ -202,7 +202,7 @@ export default async function TripDetailsPage({ params }: PageProps) {
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
                   <div>
                     <h4 className="text-sm font-bold text-[#191b25]">Arrived at Source</h4>
-                    <p className="text-xs text-[#505f76] mt-0.5">Port of Mundra, Pier 4</p>
+                    <p className="text-xs text-[#505f76] mt-0.5">Port of Seattle, Pier 91</p>
                   </div>
                   <p className="text-xs text-[#737688] font-medium sm:text-right">Jul 10, 10:15 AM</p>
                 </div>
@@ -237,7 +237,7 @@ export default async function TripDetailsPage({ params }: PageProps) {
                       </span>
                     </div>
                     <p className="text-xs text-slate-800 font-bold mt-1 leading-snug">
-                      Heading Eastbound on NH-47 • Estimated 120 km to next checkpoint
+                      Heading Eastbound on I-90 • Estimated 450 miles to next checkpoint
                     </p>
                   </div>
                   <p className="text-xs text-[#0052ff] font-bold sm:text-right shrink-0">Jul 12, 02:15 PM</p>
@@ -252,7 +252,7 @@ export default async function TripDetailsPage({ params }: PageProps) {
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 opacity-60">
                   <div>
                     <h4 className="text-sm font-semibold text-[#505f76]">Delivered</h4>
-                    <p className="text-xs text-[#505f76] mt-0.5">Ahmedabad Distribution Hub (Expected)</p>
+                    <p className="text-xs text-[#505f76] mt-0.5">Chicago Distribution Hub (Expected)</p>
                   </div>
                   <p className="text-xs text-[#737688] font-medium sm:text-right">Jul 13, 06:30 PM</p>
                 </div>

@@ -6,7 +6,6 @@ import {
   Route,
   Wrench,
   Fuel,
-  CreditCard,
   BarChart3,
   Settings,
 } from "lucide-react";
@@ -58,17 +57,10 @@ export const NAV_ITEMS: NavItem[] = [
     roles: ["ADMIN", "FLEET_MANAGER", "SAFETY_OFFICER"],
   },
   {
-    key: "fuel",
-    label: "Fuel",
-    href: "/fuel",
+    key: "fuel-expenses",
+    label: "Fuel & Expenses",
+    href: "/fuel-expenses",
     icon: Fuel,
-    roles: ["ADMIN", "FLEET_MANAGER", "FINANCIAL_ANALYST"],
-  },
-  {
-    key: "expenses",
-    label: "Expenses",
-    href: "/expenses",
-    icon: CreditCard,
     roles: ["ADMIN", "FLEET_MANAGER", "FINANCIAL_ANALYST"],
   },
   {

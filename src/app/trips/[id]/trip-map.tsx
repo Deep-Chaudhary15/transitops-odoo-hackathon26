@@ -14,14 +14,14 @@ export default function TripMap() {
     // Seattle: [47.6062, -122.3321]
     // Chicago: [41.8781, -87.6298]
     // Missoula: [46.8721, -113.9940]
-    const mundra: [number, number] = [22.84, 69.70];
-    const ahmedabad: [number, number] = [23.03, 72.58];
-    const surendranagar: [number, number] = [22.75, 71.63];
+    const seattle: [number, number] = [47.6062, -122.3321];
+    const chicago: [number, number] = [41.8781, -87.6298];
+    const missoula: [number, number] = [46.8721, -113.9940];
 
     // Initialize map
     const map = L.map(mapContainerRef.current, {
-      center: [22.9, 71.1], // Centered in Gujarat
-      zoom: 8,
+      center: [45.0, -105.0], // Centered between Seattle and Chicago
+      zoom: 5,
       zoomControl: false,
     });
 
@@ -37,22 +37,22 @@ export default function TripMap() {
 
     mapRef.current = map;
 
-    // Draw route path: Solid blue from Mundra to Surendranagar, dashed blue from Surendranagar to Ahmedabad
-    L.polyline([mundra, surendranagar], {
+    // Draw route path: Solid blue from Seattle to Missoula, dashed blue from Missoula to Chicago
+    L.polyline([seattle, missoula], {
       color: "#0052ff",
       weight: 4,
       opacity: 0.9,
     }).addTo(map);
 
-    L.polyline([surendranagar, ahmedabad], {
+    L.polyline([missoula, chicago], {
       color: "#0052ff",
       weight: 4,
       opacity: 0.6,
       dashArray: "6, 8",
     }).addTo(map);
 
-    // Origin Marker (Mundra Port)
-    const mundraIcon = L.divIcon({
+    // Origin Marker (Seattle)
+    const seattleIcon = L.divIcon({
       className: "custom-div-icon",
       html: `
         <div class="flex flex-col items-center">
@@ -62,12 +62,12 @@ export default function TripMap() {
       iconSize: [16, 16],
       iconAnchor: [8, 8],
     });
-    L.marker(mundra, { icon: mundraIcon })
+    L.marker(seattle, { icon: seattleIcon })
       .addTo(map)
-      .bindPopup("<b>Origin:</b> Mundra Port");
+      .bindPopup("<b>Origin:</b> Seattle Port");
 
-    // Destination Marker (Ahmedabad Hub)
-    const ahmedabadIcon = L.divIcon({
+    // Destination Marker (Chicago)
+    const chicagoIcon = L.divIcon({
       className: "custom-div-icon",
       html: `
         <div class="flex flex-col items-center">
@@ -77,11 +77,11 @@ export default function TripMap() {
       iconSize: [16, 16],
       iconAnchor: [8, 8],
     });
-    L.marker(ahmedabad, { icon: ahmedabadIcon })
+    L.marker(chicago, { icon: chicagoIcon })
       .addTo(map)
-      .bindPopup("<b>Destination:</b> Ahmedabad Hub");
+      .bindPopup("<b>Destination:</b> Chicago Hub");
 
-    // Current Location Marker (Surendranagar)
+    // Current Location Marker (Missoula, MT)
     const vehicleIcon = L.divIcon({
       className: "custom-div-icon",
       html: `
@@ -95,12 +95,12 @@ export default function TripMap() {
       iconSize: [24, 24],
       iconAnchor: [12, 12],
     });
-    L.marker(surendranagar, { icon: vehicleIcon })
+    L.marker(missoula, { icon: vehicleIcon })
       .addTo(map)
-      .bindPopup("<b>Current Location:</b> Near Surendranagar, Gujarat (NH-47)");
+      .bindPopup("<b>Current Location:</b> Near Missoula, MT (I-90)");
 
     // Fit map bounds to show the entire route with padding
-    map.fitBounds(L.latLngBounds([mundra, ahmedabad]), {
+    map.fitBounds(L.latLngBounds([seattle, chicago]), {
       padding: [40, 40],
     });
 
