@@ -14,7 +14,7 @@ export default async function TripDetailsPage({ params }: PageProps) {
   // otherwise fallback to the exact mock data specified in the user request.
   let dbTrip = null;
   try {
-    dbTrip = await prisma.trip.findFirst({
+    dbTrip = await prisma.trip.findUnique({
       where: { id },
       include: { vehicle: true, driver: true },
     });
